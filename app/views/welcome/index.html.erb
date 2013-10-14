@@ -15,8 +15,8 @@
         data-filter-placeholder="検索" 
         data-inset="true">
     <% @distance.each_with_index do |dis, i| %>
-      <li><a href="#page2">
-        <%= @title[i] + "[" + dis.to_s + "m]" %>
+      <li><a href="#page2" value="<%=@entry_ids[i] %>">
+        <%= @titles[i] + "[" + dis.to_s + "m]" %>
       </a></li>
     <% end %>
     </ul>
@@ -28,8 +28,11 @@
 
 
 <div id="page2" data-role="page">
-  <div data-role="header"><h1>次のページ</h1></div>
-
+  <div data-role="header">
+    <h1>次のページ</h1>
+    <a href="#page1" data-icon="arrow-l">戻る</a>
+  </div>
+  
   <div data-role="content">
     test
   </div>

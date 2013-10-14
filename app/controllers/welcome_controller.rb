@@ -30,11 +30,13 @@ class WelcomeController < ApplicationController
     if hash.present?
       @parsed = hash['results']
 
-      @title = []
+      @titles = []
       distances = []
+      @entry_ids = []
       @num = 0
       for result in @parsed
-        @title[@num] = result['title']
+        @titles[@num] = result['title']
+        @entry_ids[@num] = result['entry_id']
         distances[@num] = result['distance']
         @distance = km2m(distances)
         @num += 1;
