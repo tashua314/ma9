@@ -17,14 +17,6 @@ gem 'coffee-rails', '~> 4.0.0'
 
 #### add ####
 gem 'jquery_mobile_rails'
-
-group :development do
-  # エラー画面を分かり易く整形してくれる
-  gem 'better_errors'
-
-  # better_errorsの画面上にirb/pry(PERL)を表示する
-  gem 'binding_of_caller'
-end
 #############
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
