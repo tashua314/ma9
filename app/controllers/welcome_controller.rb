@@ -24,6 +24,12 @@ class WelcomeController < ApplicationController
 
     rescue
       @alert="URL missed..."
+      
+      respond_to do |format|
+        format.html { render :action => "error"}
+        format.iphone { render :action => "error"}
+      end
+
       return
     end
 
@@ -49,6 +55,14 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def get
+    @id = params[:id]
+    @test = "aaa"
+    #debugger
+    
+    render json: { test: @test, id: @id }
+  end
+
   # 画面表示用にkmをmに変換する
   private
   def km2m(distances)
@@ -60,5 +74,4 @@ class WelcomeController < ApplicationController
 
     return results
   end
-
 end

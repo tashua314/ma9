@@ -5,6 +5,15 @@
 class Util
   @getData: (id) ->
     console.log id
+    $.ajax({
+      type: "POST",
+      url: "get/"+id,
+      success: (data) ->
+        $("#data").text(data.test+"::"+data.id)
+      error: (status, e) ->
+        alert (status.to_s);
+        alert (e);
+    });
 
 
 $ ->
