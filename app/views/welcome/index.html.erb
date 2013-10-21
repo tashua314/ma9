@@ -5,7 +5,8 @@
     <%= @url %>
     <br>
     alert::<%= @alert %>
-    <br>
+    <br />
+    <%= raw(@parsed.to_json) %>
     <br />
     <br />
     <br />
@@ -22,7 +23,7 @@
     </ul>
   </div>
 
-  <div data-role="footer">&copy; keicode.com</div>
+  <div data-role="footer">&copy; plug-now.com</div>
 </div>
 
 
@@ -34,8 +35,28 @@
   </div>
   
   <div data-role="content">
-    <div id="data"></div> 
+    <div id="data">
+      <div id="p2_title"><span>店名：</span></div>
+      <div id="p2_address"><span>住所：</span></div>
+      <div id="p2_map">
+        <img width="200" height="200" src="http://routemap.olp.yahooapis.jp/OpenLocalPlatform/V1/routeMap?appid=dj0zaiZpPXNlSjFMd1VHWWpUQSZzPWNvbnN1bWVyc2VjcmV0Jng9NTM-&route=35.68233286004894,139.76649043148458,35.685173782469064,139.76584670132092|color:0000ffff" />
+      </div>
+      <div id="p2_tel"><span>TEL：</span></div>
+      <div id="p2_wireless"><span>無線LAN</span></div>
+      <div id="p2_category"><span>カテゴリ</span></div>
+      <div id="p2_url_pc"><span>公式サイト</span></div>
+      <div id="p2_tag"><span>電源、Qi、禁煙喫煙などの情報：</span></div>
+      <div id="p2_other"><span>その他</span></div>
+      <div id="p2_mo_url"><span>参照URL</span></div>
+    </div> 
   </div>
 
-  <div data-role="footer">&copy; keicode.com</div>
+  <div data-role="footer">&copy; plug-now.com</div>
+  <ul>
+    <li>メモ
+      <ul>
+        <li>更新したら現在地が更新されてmap最適化</li>
+      </ul>
+    </li>
+  </ul>
 </div>

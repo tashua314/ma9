@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.0.rc1'
@@ -25,6 +25,9 @@ group :development do
   # better_errorsの画面上にirb/pry(PERL)を表示する
   gem 'binding_of_caller'
 end
+
+# jsでもデータ読み込めるよう
+gem 'gon'
 #############
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes

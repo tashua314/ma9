@@ -5,6 +5,7 @@ class WelcomeController < ApplicationController
   LAT = 35.57485
   LNG = 139.655821
   RANGE = 0.005
+  @aiai = "aiai"
 
   def index
     require 'open-uri'
@@ -35,6 +36,7 @@ class WelcomeController < ApplicationController
 
     if hash.present?
       @parsed = hash['results']
+      gon.datas = @parsed
 
       @titles = []
       distances = []
@@ -56,11 +58,20 @@ class WelcomeController < ApplicationController
   end
 
   def get
-    @id = params[:id]
-    @test = "aaa"
+    id = params[:id]
+    datas = params[:datas]
+    setData = nil
+
+    datas.each do |data|
+     # debugger
+      if id == data[1]['entry_id']
+        setData = data[1]
+        break
+      end
+    end
     #debugger
-    
-    render json: { test: @test, id: @id }
+    gon.datas = datas
+    render json: { setData: setData, id: id }
   end
 
   # 画面表示用にkmをmに変換する

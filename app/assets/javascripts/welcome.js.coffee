@@ -3,20 +3,31 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 class Util
-  @getData: (id) ->
-    console.log id
-    $.ajax({
-      type: "POST",
-      url: "get/"+id,
-      success: (data) ->
-        $("#data").text(data.test+"::"+data.id)
-      error: (status, e) ->
-        alert (status.to_s);
-        alert (e);
-    });
-
+  @getData: (id, dataJson) ->
+    try
+      console.log id
+      console.log dataJson
+      $.ajax({
+        type: "POST",
+        url: "get/"+id,
+        success: (data) ->
+          $("#p2_other").append(JSON.stringify(data.setData)+"::"+data.id)
+          $("#p2_mo_url").append(gon.datas)
+          console.log "ok!"
+        error: (status, e) ->
+          console.log status
+          console.log e
+        data: datas: dataJson
+       });
+    catch error
+      console.log error
+    finally
+      console.log "end."
+      
+      
 
 $ ->
+  dataJson = gon.datas
   $('a').on 'click', () ->
-    Util.getData($(this).attr('value'))
+    Util.getData($(this).attr('value'), dataJson)
 
