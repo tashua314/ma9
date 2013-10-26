@@ -3,9 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 successCallback = (pos) ->
-  text = pos.latitude
+  text = pos.coords.latitude
   $(".now").text(text)
   console.log "get"
+  console.log text
 
 errorCallback = (err) ->
   console.log "err"
