@@ -2,6 +2,15 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+successCallback = (pos) ->
+  text = pos.latitude
+  $(".now").text(text)
+  console.log "get"
+
+errorCallback = (err) ->
+  console.log "err"
+
+
 class Util
   @getData: (id, dataJson) ->
     try
@@ -21,7 +30,7 @@ class Util
           $(".p2_url>.data").text(data.setData.url_pc)
           $(".p2_tag>.data").text(data.setData.tag)
           $(".p2_supply>.data").text(data.setData.power_supply)
-          $(".p2_other>.data").text(data.setData.other)
+          $(".p2_other>.data").html(data.setData.other)
           $(".p2_mo_url>.data").html('<a href="'+data.setData.mo_url+'">'+data.setData.mo_url+'</a>')
           console.log "ok!"
         error: (status, e) ->
@@ -33,11 +42,29 @@ class Util
       console.log error
     finally
       console.log "end."
-      
-      
+
 
 $ ->
   dataJson = gon.datas if gon?
+  
+  try
+    if (navigator.geolocation)
+      #Geolocation APIを利用できる環境向けの処理
+      geolocation = navigator.geolocation
+      test = geolocation.getCurrentPosition successCallback, errorCallback
+      console.log test
+      console.log "ok"
+    else
+      #Geolocation APIを利用できない環境向けの処理
+      console.log "ng"
+      console.log "ng"
+  catch error
+    console.log "error"
+    console.log error.message
+  finally
+    console.log "end."
+
+
   $('a').on 'click', () ->
     Util.getData($(this).attr('value'), dataJson)
 
