@@ -32,6 +32,7 @@ gem 'gon'
 
 group :production do
   gem 'therubyracer-heroku'
+end
 #############
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
