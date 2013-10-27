@@ -16,7 +16,7 @@ gem 'coffee-rails', '~> 4.0.0'
 #### add ####
 gem 'jquery_mobile_rails'
 
-group :development do
+group :development, :test do
   # エラー画面を分かり易く整形してくれる
   gem 'better_errors'
 
@@ -32,6 +32,7 @@ gem 'gon'
 
 group :production do
   gem 'therubyracer-heroku'
+  gem 'pg'
 end
 #############
 
