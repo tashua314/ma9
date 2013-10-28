@@ -8,8 +8,10 @@ class WelcomeController < ApplicationController
   @aiai = "aiai"
 
   def now
-#    @latitude = params['lat']
-#    @longtitude = params['lng']
+    @latitude = params['lat']
+    @longtitude = params['lng']
+    log = Log.create(latitude: @latitude, longtitude: @longtitude)
+
 
     redirect_to :action => "index"
     

@@ -5,7 +5,7 @@
 successCallback = (pos) ->
   console.log "start successCallback."
   latitude = pos.coords.latitude
-  longtitude = pos.coords.latitude
+  longtitude = pos.coords.longtitude
 #  document.location = "/now/"+latitude+"/"+longtitude
 
 errorCallback = (err) ->
