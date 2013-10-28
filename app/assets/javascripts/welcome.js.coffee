@@ -13,7 +13,9 @@ successCallback = (pos) ->
 
 
 errorCallback = (err) ->
-  console.log "err"
+  console.log "getLocation err."
+  console.log err.message
+  $('.error_message').text("位置情報が取得できません。")
 
 
 class Util

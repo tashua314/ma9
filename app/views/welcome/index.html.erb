@@ -3,6 +3,7 @@
 
   <div data-role="content">
     <div class="top_pic">プラグNOW！</div>
+    <div class="error_message"></div>
     <div class="action_area">
       <form action="/index" method="POST" class="search_form">
         <div class="now">
@@ -18,18 +19,18 @@
     <br />
     <br />
     <div class="list_area">
+    <% if @distance.present? %>
       <ul data-role="listview" 
           data-filter="true" 
           data-filter-placeholder="検索" 
           data-inset="true">
-    <% if @distance.present? %>
       <% @distance.each_with_index do |dis, i| %>
         <li><a href="#page2" value="<%=@entry_ids[i] %>">
           <%= @titles[i] + "[" + dis.to_s + "m]" %>
         </a></li>
       <% end %>
-    <% end %>
       </ul>
+    <% end %>
     </div><!-- end list_area -->
   </div><!-- end content -->
 
