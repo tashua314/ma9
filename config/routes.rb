@@ -3,7 +3,8 @@ DECIMAL_PATTERN = /.*/
 Ma9::Application.routes.draw do
   root :to => 'welcome#index'
   get 'index' => 'welcome#index'
-  get 'index/:lat/:lng' => 'welcome#index', constraints: { :lat => DECIMAL_PATTERN, :lng => DECIMAL_PATTERN}
+  post 'index' => 'welcome#index'
+#  get 'index/:lat/:lng' => 'welcome#index', constraints: { :lat => DECIMAL_PATTERN, :lng => DECIMAL_PATTERN}
   post 'getDetail/:id' => 'welcome#getDetail'
 
   # The priority is based upon order of creation: first created -> highest priority.

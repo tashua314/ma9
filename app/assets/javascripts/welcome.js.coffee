@@ -42,7 +42,7 @@ class Util
           console.log status
           console.log e
         data: datas: dataJson
-       });
+      });
     catch error
       console.log error
     finally
@@ -57,9 +57,8 @@ class Util
         console.log "navigator ok."
         #Geolocation APIを利用できる環境向けの処理
         geolocation = navigator.geolocation
-        a = geolocation.getCurrentPosition successCallback, errorCallback
+        geolocation.getCurrentPosition successCallback, errorCallback
         console.log "ok"
-        console.log a
       else
         #Geolocation APIを利用できない環境向けの処理
         console.log "ng"
@@ -72,7 +71,6 @@ class Util
 
 
 $ ->
-  
   nowLocation = new Array()
   if gon?
     console.log "I have gon."
@@ -80,13 +78,11 @@ $ ->
     if gon.latitude?
       nowLocation['latitude'] = gon.latitude
       nowLocation['longitude'] = gon.longitude
-    else
 
     console.log gon
     console.log "have you lat?: " + nowLocation['latitude']?
     Util.getLocation() if !nowLocation['latitude']?
 
-    
 
   $('.list_area a').on 'click', () ->
     console.log "click "+ this
