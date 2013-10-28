@@ -7,14 +7,35 @@ class WelcomeController < ApplicationController
   RANGE = 0.005
   @aiai = "aiai"
 
+  def now
+#    @latitude = params['lat']
+#    @longtitude = params['lng']
+
+    redirect_to :action => "index"
+    
+  end
+
   def index
     require 'open-uri'
     require 'json'
 
     parsed=['']
-    
+    if params['latitude'].present?
+      lat = params['latitude']
+      lng = params['longtitude']
+      gon.debug = "real"
+    else
+      lat = "&lat="+LAT.to_s
+      lng = "&lng="+LNG.to_s
+      gon.debug = "sample"
+    #  return
+    end
     lat = "&lat="+LAT.to_s
     lng = "&lng="+LNG.to_s
+
+    gon.latitude = lat
+    gon.longtitude = lng
+    
     url = MAPI_URL+"n="+(LAT+RANGE).to_s+"&e="+(LNG+RANGE).to_s+"&s="+(LAT-RANGE).to_s+"&w="+(LNG-RANGE).to_s+lat+lng
     @url = url
 
@@ -57,7 +78,7 @@ class WelcomeController < ApplicationController
     end
   end
 
-  def get
+  def getDetail
     id = params[:id]
     datas = params[:datas]
     setData = nil

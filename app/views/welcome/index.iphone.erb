@@ -2,40 +2,94 @@
   <div data-role="header"><h1>jQuery Mobile デモ</h1></div>
 
   <div data-role="content">
+    <div class="top_pic">プラグNOW！</div>
+    <div class="action_area">
+      <div class="now">now</div>
+        
+      <div class="search">
+      </div>
+    </div>
     <%= @url %>
     <br>
-    alert::<%= @alert %>
-    <br>
     <br />
     <br />
-    <br />
-
-    <ul data-role="listview" 
-        data-filter="true" 
-        data-filter-placeholder="検索" 
-        data-inset="true">
-    <% @distance.each_with_index do |dis, i| %>
-      <li><a href="#page2" value="<%=@entry_ids[i] %>">
-        <%= @titles[i] + "[" + dis.to_s + "m]" %>
-      </a></li>
+    <div class="list_area">
+      <ul data-role="listview" 
+          data-filter="true" 
+          data-filter-placeholder="検索" 
+          data-inset="true">
+    <% if @distance.present? %>
+      <% @distance.each_with_index do |dis, i| %>
+        <li><a href="#page2" value="<%=@entry_ids[i] %>">
+          <%= @titles[i] + "[" + dis.to_s + "m]" %>
+        </a></li>
+      <% end %>
     <% end %>
-    </ul>
-  </div>
+      </ul>
+    </div><!-- end list_area -->
+  </div><!-- end content -->
 
-  <div data-role="footer">&copy; keicode.com</div>
-</div>
+  <div data-role="footer">&copy; plug-now.com</div>
+</div><!-- end page1 -->
 
 
 
 <div id="page2" data-role="page">
-  <div data-role="header">
+  <div id="p2_header" data-role="header">
     <h1>次のページ</h1>
     <a href="#page1" data-icon="arrow-l">戻る</a>
   </div>
   
   <div data-role="content">
-    test
-  </div>
+    <div id="p2_map">
+      <img width="200" height="200" src="http://routemap.olp.yahooapis.jp/OpenLocalPlatform/V1/routeMap?appid=dj0zaiZpPXNlSjFMd1VHWWpUQSZzPWNvbnN1bWVyc2VjcmV0Jng9NTM-&route=35.68233286004894,139.76649043148458,35.685173782469064,139.76584670132092|color:0000ffff" />
+    </div>
+    <div class="detail_area">
+      <div class="p2_address">
+        <span>住所：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_tel">
+        <span>TEL：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_wireless">
+        <span>無線LAN：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_category">
+        <span>カテゴリ：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_url_pc">
+      <span>公式サイト：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_tag">
+        <span>電源、Qi、禁煙喫煙などの情報：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_supply">
+        <span>電源使用可否：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_other">
+        <span>その他：</span>
+        <span class="data"></span>
+      </div>
+      <div class="p2_mo_url">
+        <span>参照URL：</span>
+        <span class="data"></span>
+      </div>
+    </div><!-- end detail_area -->
+  </div><!-- end content -->
 
-  <div data-role="footer">&copy; keicode.com</div>
+  <div data-role="footer">&copy; plug-now.com</div>
+  <ul>
+    <li>メモ
+      <ul>
+        <li>更新したら現在地が更新されてmap最適化</li>
+      </ul>
+    </li>
+  </ul>
 </div>

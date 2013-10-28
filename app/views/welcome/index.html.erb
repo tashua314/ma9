@@ -1,13 +1,14 @@
 <div id="page1" data-role="page">
-  <div data-role="header"><h1>jQuery Mobile デモ</h1></div>
+  <div data-role="header"><h1>プラグNOW！</h1></div>
 
   <div data-role="content">
-    <div class="top_pic">top_pic</div>
+    <div class="top_pic">プラグNOW！</div>
     <div class="action_area">
-      <div class="now">now</div>
-      <div class="search">serch</div>
+      <div class="now"></div>
+        
+      <div class="search">
+      </div>
     </div>
-    <%= @url %>
     <br>
     <br />
     <br />
@@ -16,11 +17,13 @@
           data-filter="true" 
           data-filter-placeholder="検索" 
           data-inset="true">
+    <% if @distance.present? %>
       <% @distance.each_with_index do |dis, i| %>
         <li><a href="#page2" value="<%=@entry_ids[i] %>">
           <%= @titles[i] + "[" + dis.to_s + "m]" %>
         </a></li>
       <% end %>
+    <% end %>
       </ul>
     </div><!-- end list_area -->
   </div><!-- end content -->

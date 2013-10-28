@@ -3,23 +3,23 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 successCallback = (pos) ->
-  text = pos.coords.latitude
-  $(".now").text(text)
-  console.log "get"
-  console.log text
+  console.log "start successCallback."
+  latitude = pos.coords.latitude
+  longtitude = pos.coords.latitude
+#  document.location = "/now/"+latitude+"/"+longtitude
 
 errorCallback = (err) ->
   console.log "err"
 
 
 class Util
-  @getData: (id, dataJson) ->
+  @getDetail: (id, dataJson) ->
     try
       console.log id
       console.log dataJson
       $.ajax({
         type: "POST",
-        url: "get/"+id,
+        url: "getDetail/"+id,
         success: (data) ->
           console.log data.id
           console.log data.setData
@@ -45,27 +45,45 @@ class Util
       console.log "end."
 
 
-$ ->
-  dataJson = gon.datas if gon?
-  
-  try
-    if (navigator.geolocation)
-      #Geolocation APIを利用できる環境向けの処理
-      geolocation = navigator.geolocation
-      test = geolocation.getCurrentPosition successCallback, errorCallback
-      console.log test
-      console.log "ok"
-    else
-      #Geolocation APIを利用できない環境向けの処理
-      console.log "ng"
-      console.log "ng"
-  catch error
-    console.log "error"
-    console.log error.message
-  finally
-    console.log "end."
+  @getLocation: ->
+    nowLocation = new Array()
+    console.log "start getLocation"
+    try
+      if (navigator.geolocation)
+        console.log "navigator ok."
+        #Geolocation APIを利用できる環境向けの処理
+        geolocation = navigator.geolocation
+        a = geolocation.getCurrentPosition successCallback, errorCallback
+        console.log "ok"
+        console.log a
+      else
+        #Geolocation APIを利用できない環境向けの処理
+        console.log "ng"
+    catch error
+      console.log "error"
+      console.log error.message
+    finally
+      console.log "end."
 
+
+
+$ ->
+  
+  nowLocation = new Array()
+  if gon?
+    console.log "I have gon."
+    dataJson = gon.datas
+    if gon.latitude?
+      nowLocation['latitude'] = gon.latitude
+      nowLocation['longtitude'] = gon.longtitude
+    else
+
+    console.log gon
+   console.log "have you lat?: " + nowLocation['latitude']?
+   Util.getLocation() if !nowLocation['latitude']?
+
+    
 
   $('a').on 'click', () ->
-    Util.getData($(this).attr('value'), dataJson)
+    Util.getDetail($(this).attr('value'), dataJson)
 

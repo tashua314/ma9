@@ -1,5 +1,8 @@
 Ma9::Application.routes.draw do
   root :to => 'welcome#index'
+  get 'index' => 'welcome#index'
+  get 'now/:lat/:lng' => 'welcome#now'
+  get 'now' => 'welcome#now'
   post 'get/:id' => 'welcome#get'
 
   # The priority is based upon order of creation: first created -> highest priority.
