@@ -8,12 +8,11 @@ class WelcomeController < ApplicationController
   @aiai = "aiai"
 
   def now
-    @latitude = params['lat']
-    @longtitude = params['lng']
-    log = Log.create(latitude: @latitude, longtitude: @longtitude)
+    lat = params['lat']
+    lng = params['lng']
 
 
-    redirect_to :action => "index"
+    redirect_to :action => "index", :lat => lat, :lng => lng
     
   end
 
@@ -22,23 +21,25 @@ class WelcomeController < ApplicationController
     require 'json'
 
     parsed=['']
-    if params['latitude'].present?
-      lat = params['latitude']
-      lng = params['longtitude']
+    if params['lat'].present?
+      lat = params['lat']
+      lng = params['lng']
       gon.debug = "real"
+      log = Log.create(latitude: lat, longitude: lng)
     else
-      lat = "&lat="+LAT.to_s
-      lng = "&lng="+LNG.to_s
-      gon.debug = "sample"
-    #  return
+      #lat = "&lat="+LAT.to_s
+      #lng = "&lng="+LNG.to_s
+      gon.debug = "none"
+      return
     end
-    lat = "&lat="+LAT.to_s
-    lng = "&lng="+LNG.to_s
+
+    lat_param = "&lat="+LAT.to_s
+    lng_param = "&lng="+LNG.to_s
 
     gon.latitude = lat
-    gon.longtitude = lng
+    gon.longitude = lng
     
-    url = MAPI_URL+"n="+(LAT+RANGE).to_s+"&e="+(LNG+RANGE).to_s+"&s="+(LAT-RANGE).to_s+"&w="+(LNG-RANGE).to_s+lat+lng
+    url = MAPI_URL+"n="+(lat.to_f+RANGE).to_s+"&e="+(lng.to_f+RANGE).to_s+"&s="+(lat.to_f-RANGE).to_s+"&w="+(lng.to_f-RANGE).to_s+lat_param+lng_param
     @url = url
 
     begin
@@ -86,13 +87,11 @@ class WelcomeController < ApplicationController
     setData = nil
 
     datas.each do |data|
-     # debugger
       if id == data[1]['entry_id']
         setData = data[1]
         break
       end
     end
-    #debugger
     gon.datas = datas
     render json: { setData: setData, id: id }
   end

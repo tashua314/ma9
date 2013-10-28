@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20131028133814) do
 
   create_table "logs", force: true do |t|
     t.string   "latitude"
-    t.string   "longtitude"
+    t.string   "longitude"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

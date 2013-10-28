@@ -5,8 +5,12 @@
 successCallback = (pos) ->
   console.log "start successCallback."
   latitude = pos.coords.latitude
-  longtitude = pos.coords.longtitude
-#  document.location = "/now/"+latitude+"/"+longtitude
+  longitude = pos.coords.longitude
+  console.log latitude + "/" + longitude
+  $('input[name=lat]').val(latitude)
+  $('input[name=lng]').val(longitude)
+  $('.search_form').submit()
+
 
 errorCallback = (err) ->
   console.log "err"
@@ -75,7 +79,7 @@ $ ->
     dataJson = gon.datas
     if gon.latitude?
       nowLocation['latitude'] = gon.latitude
-      nowLocation['longtitude'] = gon.longtitude
+      nowLocation['longitude'] = gon.longitude
     else
 
     console.log gon
