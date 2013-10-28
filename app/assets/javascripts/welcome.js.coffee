@@ -79,11 +79,12 @@ $ ->
     else
 
     console.log gon
-   console.log "have you lat?: " + nowLocation['latitude']?
-   Util.getLocation() if !nowLocation['latitude']?
+    console.log "have you lat?: " + nowLocation['latitude']?
+    Util.getLocation() if !nowLocation['latitude']?
 
     
 
-  $('a').on 'click', () ->
+  $('.list_area a').on 'click', () ->
+    console.log "click "+ this
     Util.getDetail($(this).attr('value'), dataJson)
 

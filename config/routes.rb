@@ -3,7 +3,7 @@ Ma9::Application.routes.draw do
   get 'index' => 'welcome#index'
   get 'now/:lat/:lng' => 'welcome#now'
   get 'now' => 'welcome#now'
-  post 'get/:id' => 'welcome#get'
+  post 'getDetail/:id' => 'welcome#getDetail'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
