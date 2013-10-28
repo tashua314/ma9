@@ -27,5 +27,6 @@ module Ma9
     #
 
     #config.assets.initialize_on_precompile = false
+    config.secret_key_base = 'tashua314'
   end
 end
