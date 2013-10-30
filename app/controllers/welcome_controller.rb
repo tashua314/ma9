@@ -2,6 +2,7 @@ class WelcomeController < ApplicationController
 
   SCALE = 1000
   MAPI_URL = "http://oasis.mogya.com/api/v0/search?"
+  # sample
   LAT = 35.57485
   LNG = 139.655821
   RANGE = 0.005
@@ -27,18 +28,19 @@ class WelcomeController < ApplicationController
       gon.debug = "real"
       log = Log.create(latitude: lat, longitude: lng)
     else
-      #lat = "&lat="+LAT.to_s
-      #lng = "&lng="+LNG.to_s
+      #lat = LAT
+      #lng = LNG
       gon.debug = "none"
+      rend_index
       return
     end
-
-    lat_param = "&lat="+LAT.to_s
-    lng_param = "&lng="+LNG.to_s
+    
+    lat_param = "&lat="+lat.to_s
+    lng_param = "&lng="+lng.to_s
 
     gon.latitude = lat
     gon.longitude = lng
-    
+  
     url = MAPI_URL+"n="+(lat.to_f+RANGE).to_s+"&e="+(lng.to_f+RANGE).to_s+"&s="+(lat.to_f-RANGE).to_s+"&w="+(lng.to_f-RANGE).to_s+lat_param+lng_param
     @url = url
 
@@ -74,11 +76,7 @@ class WelcomeController < ApplicationController
         @num += 1;
       end
     end
-
-    respond_to do |format|
-      format.html { render :action => "index"}
-      format.iphone { render :action => "index"}
-    end
+    rend_index
   end
 
   def getDetail
@@ -98,6 +96,13 @@ class WelcomeController < ApplicationController
 
   # 画面表示用にkmをmに変換する
   private
+  def rend_index
+    respond_to do |format|
+      format.html { render :action => "index"}
+      format.iphone { render :action => "index"}
+    end
+  end
+
   def km2m(distances)
     results = []
     distances.each do |dis|

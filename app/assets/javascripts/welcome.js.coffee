@@ -19,16 +19,26 @@ errorCallback = (err) ->
 
 
 class Util
-  @getDetail: (id, dataJson) ->
+  YAHOO_PATH = "http://routemap.olp.yahooapis.jp/OpenLocalPlatform/V1/routeMap?appid="
+  APP_ID = "dj0zaiZpPXNlSjFMd1VHWWpUQSZzPWNvbnN1bWVyc2VjcmV0Jng9NTM-"
+  ROUTE = "&route="
+  @getDetail: (id, dataJson, nowLocation) ->
     try
+      S_LAT = nowLocation['latitude'] if nowLocation?
+      S_LNG = nowLocation['longitude'] if nowLocation?
+      console.log "getDetail"
       console.log id
       console.log dataJson
+      console.log nowLocation
       $.ajax({
         type: "POST",
         url: "getDetail/"+id,
         success: (data) ->
           console.log data.id
           console.log data.setData
+          G_LAT = data.setData.latitude
+          G_LNG = data.setData.longitude
+          $("#p2_map").html('<img width="200" height="200" src="'+YAHOO_PATH+APP_ID+ROUTE+S_LAT+','+S_LNG+','+G_LAT+','+G_LNG+'|color:0000ffff" />')
           $("#p2_header>h1").text(data.setData.title)
           $(".p2_address>.data").text(data.setData.address)
           $(".p2_tel>.data").text(data.setData.tel)
@@ -41,8 +51,9 @@ class Util
           $(".p2_mo_url>.data").html('<a href="'+data.setData.mo_url+'">'+data.setData.mo_url+'</a>')
           console.log "ok!"
         error: (status, e) ->
+          console.log "getDetail error"
           console.log status
-          console.log e
+          console.log e.message
         data: datas: dataJson
       });
     catch error
@@ -65,7 +76,7 @@ class Util
         #Geolocation APIを利用できない環境向けの処理
         console.log "ng"
     catch error
-      console.log "error"
+      console.log "error!"
       console.log error.message
     finally
       console.log "end."
@@ -88,5 +99,7 @@ $ ->
 
   $('.list_area a').on 'click', () ->
     console.log "click "+ this
-    Util.getDetail($(this).attr('value'), dataJson)
+    console.log "now?"
+    console.log nowLocation
+    Util.getDetail($(this).attr('value'), dataJson, nowLocation)
 
