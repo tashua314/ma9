@@ -1,31 +1,36 @@
 <div id="page1" data-role="page">
-  <div data-role="header"><h1>jQuery Mobile デモ</h1></div>
+  <div data-role="header"><h1>プラグNOW！</h1></div>
 
   <div data-role="content">
     <div class="top_pic">プラグNOW！</div>
+    <div class="error_message"></div>
     <div class="action_area">
-      <div class="now">now</div>
+      <form action="/index" method="POST" class="search_form">
+        <div class="now">
+          <input type="hidden" name="lat" />
+          <input type="hidden" name="lng" />
+        </div>
         
-      <div class="search">
-      </div>
+        <div class="search">
+        </div>
+      </form>
     </div>
-    <%= @url %>
     <br>
     <br />
     <br />
     <div class="list_area">
+    <% if @distance.present? %>
       <ul data-role="listview" 
           data-filter="true" 
           data-filter-placeholder="検索" 
           data-inset="true">
-    <% if @distance.present? %>
       <% @distance.each_with_index do |dis, i| %>
         <li><a href="#page2" value="<%=@entry_ids[i] %>">
           <%= @titles[i] + "[" + dis.to_s + "m]" %>
         </a></li>
       <% end %>
-    <% end %>
       </ul>
+    <% end %>
     </div><!-- end list_area -->
   </div><!-- end content -->
 
@@ -42,7 +47,6 @@
   
   <div data-role="content">
     <div id="p2_map">
-      <img width="200" height="200" src="http://routemap.olp.yahooapis.jp/OpenLocalPlatform/V1/routeMap?appid=dj0zaiZpPXNlSjFMd1VHWWpUQSZzPWNvbnN1bWVyc2VjcmV0Jng9NTM-&route=35.68233286004894,139.76649043148458,35.685173782469064,139.76584670132092|color:0000ffff" />
     </div>
     <div class="detail_area">
       <div class="p2_address">
