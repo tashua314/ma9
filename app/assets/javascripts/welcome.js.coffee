@@ -60,6 +60,7 @@ class Util
       console.log error
     finally
       console.log "end."
+      console.log gon
 
 
   @getLocation: ->
@@ -89,12 +90,14 @@ $ ->
     console.log "I have gon."
     dataJson = gon.datas
     if gon.latitude?
+      console.log "have lat."
       nowLocation['latitude'] = gon.latitude
       nowLocation['longitude'] = gon.longitude
 
     console.log gon
     console.log "have you lat?: " + nowLocation['latitude']?
-    Util.getLocation() if !nowLocation['latitude']?
+
+  Util.getLocation() if !nowLocation['latitude']?
 
 
   $('.list_area a').on 'click', () ->
