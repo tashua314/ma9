@@ -28,11 +28,11 @@ class WelcomeController < ApplicationController
       gon.debug = "real"
       log = Log.create(latitude: lat, longitude: lng)
     else
-      lat = LAT
-      lng = LNG
+      #lat = LAT
+      #lng = LNG
       gon.debug = "none"
-      #rend_index
-      #return
+      rend_index
+      return
     end
     
     lat_param = "&lat="+lat.to_s
