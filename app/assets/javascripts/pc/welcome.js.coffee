@@ -85,6 +85,13 @@ class Util
 
 
 $ ->
+  $('.list_area a').live 'click', () ->
+    console.log "click "+ this
+    console.log "now?"
+    console.log nowLocation
+    Util.getDetail($(this).attr('value'), dataJson, nowLocation)
+
+
   nowLocation = new Array()
   if gon?
     console.log "I have gon."
@@ -97,12 +104,5 @@ $ ->
     console.log gon
     console.log "have you lat?: " + nowLocation['latitude']?
 
+  console.log nowLocation['latitude'] 
   Util.getLocation() if !nowLocation['latitude']?
-
-
-  $('.list_area a').on 'click', () ->
-    console.log "click "+ this
-    console.log "now?"
-    console.log nowLocation
-    Util.getDetail($(this).attr('value'), dataJson, nowLocation)
-
