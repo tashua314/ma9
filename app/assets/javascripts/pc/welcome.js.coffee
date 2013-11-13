@@ -23,9 +23,11 @@ class Util
   APP_ID = "dj0zaiZpPXNlSjFMd1VHWWpUQSZzPWNvbnN1bWVyc2VjcmV0Jng9NTM-"
   ROUTE = "&route="
   @getDetail: (id, dataJson, nowLocation) ->
-    try
-      S_LAT = nowLocation['latitude'] if nowLocation?
-      S_LNG = nowLocation['longitude'] if nowLocation?
+    try 
+      if nowLocation?
+        S_LAT = nowLocation.latitude
+        S_LNG = nowLocation.longitude
+
       console.log "getDetail"
       console.log id
       console.log dataJson
@@ -64,7 +66,7 @@ class Util
 
 
   @getLocation: ->
-    nowLocation = new Array()
+    nowLocation = []
     console.log "start getLocation"
     try
       if (navigator.geolocation)
@@ -85,24 +87,24 @@ class Util
 
 
 $ ->
-  $('.list_area a').live 'click', () ->
+  $('.list_area a').on 'click', () ->
     console.log "click "+ this
     console.log "now?"
     console.log nowLocation
     Util.getDetail($(this).attr('value'), dataJson, nowLocation)
 
 
-  nowLocation = new Array()
+  nowLocation = []
   if gon?
     console.log "I have gon."
     dataJson = gon.datas
     if gon.latitude?
       console.log "have lat."
-      nowLocation['latitude'] = gon.latitude
-      nowLocation['longitude'] = gon.longitude
+      nowLocation.latitude = gon.latitude
+      nowLocation.longitude = gon.longitude
 
     console.log gon
-    console.log "have you lat?: " + nowLocation['latitude']?
+    console.log "have you lat?: " + nowLocation.latitude?
 
-  console.log nowLocation['latitude'] 
-  Util.getLocation() if !nowLocation['latitude']?
+  console.log nowLocation.latitude 
+  Util.getLocation() if !nowLocation.latitude?
