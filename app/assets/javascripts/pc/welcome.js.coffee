@@ -87,7 +87,7 @@ class Util
 
 
 $ ->
-  $('.list_area a').on 'click', () ->
+  $("#page1").on "click",".list_area a", () ->
     console.log "click "+ this
     console.log "now?"
     console.log nowLocation
