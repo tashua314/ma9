@@ -94,7 +94,6 @@ class WelcomeController < ApplicationController
     render json: { setData: setData, id: id }
   end
 
-  # 画面表示用にkmをmに変換する
   private
   def rend_index
     respond_to do |format|
@@ -103,6 +102,7 @@ class WelcomeController < ApplicationController
     end
   end
 
+  # 画面表示用にkmをmに変換する
   def km2m(distances)
     results = []
     distances.each do |dis|
